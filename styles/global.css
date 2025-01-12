@@ -1,5 +1,5 @@
 :root {
-    --acent-color: #6d23b6;
+    --acent-color: #1b3b6f;
     --snd-acent-color: #ea698b;
     --light-background: #ffffff;
     --dark-background: #f5f5f5;
@@ -42,7 +42,7 @@ class selectors
 }
 
 .nav-history-page-link{
-    color: var(--acent-color);
+    color: var(--snd-acent-color);
     text-decoration: none
 }
 

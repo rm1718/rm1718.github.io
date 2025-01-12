@@ -2,12 +2,10 @@
 HowLongDoIWait is a simple website for estimating the waited time on a trip.
 
 ## TODOs
-- test
 - add breakpoints
     - for desktop (lg) (<992px) (first)
     - for mobile (xs) (<576px)
     - for tablet (md) (<768px)
-- choose colors
 - write readme
 
 ## Further Finding
