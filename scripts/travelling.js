@@ -60,8 +60,13 @@ function startWatchingPosition() {
 }
 
 function onNewPosition(position) {
-    var distance = getDistanceBetweenPoints(position.coords.latitude, position.coords.longitude, lastLat, lastLong);
     var time = ((position.timestamp - lastimeStamp) / 1000);
+    if(time > 3){
+        //wait till movement is stable enough
+        return;
+    }
+
+    var distance = getDistanceBetweenPoints(position.coords.latitude, position.coords.longitude, lastLat, lastLong);
     var speed = distance / time;
 
     //update speedometer
