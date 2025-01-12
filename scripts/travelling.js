@@ -153,15 +153,22 @@ function navToResult() {
         }
     }
 
-    //convert to records. One record has max 192bit
+    // convert to records
+    // 
+    // We ignore all waiting points with waiting seconds below 6 seconds,
+    // because of inaccuracy of GPS.
+    // 
+    // One record has max 192bit
     var waitingPointRecords = [];
     for (let i = 0; i < waitingPoints.length; i++) {
         var wPoint = waitingPoints[i];
-        waitingPointRecords.push({
-            latitude: wPoint.latitude,
-            longitude: wPoint.longitude,
-            waitingSeconds: wPoint.waitingSeconds
-        });
+        if(wPoint.waitingSeconds > 6){
+            waitingPointRecords.push({
+                latitude: wPoint.latitude,
+                longitude: wPoint.longitude,
+                waitingSeconds: wPoint.waitingSeconds
+            });
+        }
     }
 
     //local storage is 5MiB big => 218000 waiting points are possible => need a world tour for that...
