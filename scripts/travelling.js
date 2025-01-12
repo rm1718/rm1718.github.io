@@ -46,7 +46,11 @@ function startWatchingPosition() {
             timeout: 5000,
             maximumAge: 0,
         };
-        navigator.geolocation.getCurrentPosition(onNewPosition, showError, options);
+        navigator.geolocation.getCurrentPosition(function (pos) {
+            lastLat = pos.coords.latitude;
+            lastLong = pos.coords.longitude;
+            lastimeStamp = pos.timestamp;
+        }, showError, options);
         watchId = navigator.geolocation.watchPosition(onNewPosition, showError, options);
     } else {
         //location is not supported by this browser
@@ -55,17 +59,20 @@ function startWatchingPosition() {
 }
 
 function onNewPosition(position) {
-    if (position.coords.speed != null) {
-        showSetupError("Your browser isn't able to estimate the speed. Try changing your device or browser!");
-        navigator.geolocation.clearWatch(watchId);
-        return;
-    }
+    var distance = getDistanceBetweenPoints(position.coords.latitude, position.coords.longitude, lastLat, lastLong);
+    var speed = distance / ((position.timestamp - lastimeStamp) / 1000);
 
-    if (waitingPoints.length == 0 && position.coords.speed <= minVelocity) {
+    //update speedometer
+    $("#speedo-meter").text(`at ${Math.floor(speed * 3.6)} km/h`);
+
+    //set for next position
+    lastimeStamp = position.timestamp;
+
+    if (waitingPoints.length == 0 && speed <= minVelocity) {
         waitingPoints.push({
             latitude: position.coords.latitude,
-            longitude: position.coord.longitude,
-            startUnixTimeStamp: Date.now() / 1000,
+            longitude: position.coords.longitude,
+            startUnixTimeStamp: position.timestamp,
             waitingSeconds: 0,
             isClosed: false
         });
@@ -75,12 +82,12 @@ function onNewPosition(position) {
     if (waitingPoints.length > 0) {
         var last = waitingPoints[waitingPoints.length - 1];
 
-        if (position.coords.speed <= minVelocity) {
+        if (speed <= minVelocity) {
             if (last.isClosed) {
                 waitingPoints.push({
                     latitude: position.coords.latitude,
-                    longitude: position.coord.longitude,
-                    startUnixTimeStamp: Date.now() / 1000,
+                    longitude: position.coords.longitude,
+                    startUnixTimeStamp: position.timestamp,
                     waitingSeconds: 0,
                     isClosed: false
                 });
@@ -153,6 +160,14 @@ function wait(milliseconds) {
     });
 }
 
+function getDistanceBetweenPoints(lat1, lon1, lat2, lon2) {
+    const R = 6371e3;
+    const x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
+    const y = (lat2 - lat1);
+    const d = Math.sqrt(x * x + y * y) * R;
+    return d;
+}
+
 /**
  * Execution
  */
@@ -165,6 +180,9 @@ var watchId;
 //minimum velocity in m/s
 const urlParams = new URLSearchParams(window.location.search);
 const minVelocity = parseFloat(urlParams.get('minvelocity')) / 3.6;
+var lastLat = 0;
+var lastLong = 0;
+var lastimeStamp = 0;
 
 var waitingPoints = [];
 

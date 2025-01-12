@@ -11,3 +11,6 @@ HowLongDoIWait is a simple website for estimating the waited time on a trip.
 - test
 - choose colors
 - write readme
+
+## Further Finding
+- oldthough geolcation.coord speed is implemented according to can i use => it is not...
