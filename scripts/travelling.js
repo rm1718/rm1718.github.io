@@ -45,6 +45,7 @@ function startWatchingPosition() {
             enableHighAccuracy: true,
             timeout: 15000,
             maximumAge: 0,
+            
         };
         navigator.geolocation.getCurrentPosition(function (pos) {
             lastLat = pos.coords.latitude;
@@ -66,7 +67,7 @@ function onNewPosition(position) {
     //update speedometer
     if(speed != NaN){
         //$("#speedo-meter").text(` at ${Math.floor(speed * 3.6)} km/h`);
-        $("#speedo-meter").text(` at lat: ${position.coords.latitude}, long: ${position.coords.longitude}, time: ${time}, speed: ${Math.floor(speed * 3.6)} km/h`);
+        $("#speedo-meter").text(` at acc: ${position.coords.accuracy} lat: ${position.coords.latitude}, long: ${position.coords.longitude}, time: ${time}, speed: ${Math.floor(speed * 3.6)} km/h`);
     }
     else{
         return;
