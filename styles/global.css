@@ -1,0 +1,112 @@
+:root {
+    --acent-color: #6d23b6;
+    --snd-acent-color: #ea698b;
+    --light-background: #ffffff;
+    --dark-background: #f5f5f5;
+    --success-green: green;
+    --error-red: red;
+}
+
+/*
+universal selector
+*/
+* {
+    font-family: "Poppins", sans-serif;
+}
+
+/*
+class selectors
+*/
+.page {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.info-article{
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 3px 3px  var(--acent-color);
+    background-color: var(--dark-background);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.nav-title{
+    text-shadow: 1px 1px 1px #ababab;
+}
+
+.nav-history{
+    margin: 1rem;
+}
+
+.nav-history-page-link{
+    color: var(--acent-color);
+    text-decoration: none
+}
+
+.spinner{
+    color: var(--acent-color)
+}
+
+.success-message{
+    color: var(--success-green);
+}
+
+.error-message{
+    color: var(--error-red);
+}
+
+.result-message-container{
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    gap: 1rem;
+}
+
+.link-color {
+    color: var(--acent-color);
+} 
+
+.max-length-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 1200px;
+    width: 100%;
+} 
+
+/*
+for future reference: change customizing bootstrap by using scss files. For a prototype this is fine 
+*/
+.primary-action-btn, .primary-action-btn:hover, .primary-action-btn:active, .primary-action-btn:visited {
+    background-color: var(--acent-color) !important;
+    border-color: var(--acent-color) !important;
+}
+.secondary-action-btn, .secondary-action-btn:hover, .secondary-action-btn:active, .secondary-action-btn:visited {
+    background-color: var(--snd-acent-color) !important;
+    border-color: var(--snd-acent-color) !important;
+}
+
+/*
+element selectors
+*/
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 4rem;
+}

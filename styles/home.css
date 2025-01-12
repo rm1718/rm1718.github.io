@@ -1,0 +1,41 @@
+/*
+Name selectors
+*/
+#welcome-container{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#routes-container{
+    margin: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#welcome-text{
+    margin-bottom: 1rem;
+    text-align: center;
+}
+#setup-check-result{
+    margin-top: 1rem 
+}
+
+/*
+Class selectors
+*/
+.route {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    height: 10rem;
+    width: 10rem;
+}
+
+.icon {
+    font-size: 3rem;
+    color: var(--acent-color);
+}
+
+.icon-container {
+    margin: 1rem;
+}

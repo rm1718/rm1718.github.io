@@ -1,0 +1,52 @@
+/*
+id selectors
+*/
+#total-waiting-time-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+#total-waiting-time-inner-container {
+    margin-left: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+#total-waiting-time {
+    font-size: 2rem;
+    grid-row: 1;
+    grid-column: 1 / span 2;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#restart-btn {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+#home-btn {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+#map-container {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem
+}
+
+#map {
+    height: 50vh;
+    border-radius: 10px;
+}
+
+/*
+name selectors
+*/
+h1 {
+    margin-top: 0.5rem;
+}
