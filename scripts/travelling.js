@@ -61,7 +61,7 @@ function startWatchingPosition() {
 
 function onNewPosition(position) {
     var time = ((position.timestamp - lastimeStamp) / 1000);
-    if(time > 3){
+    if(time < 3){
         //wait till movement is stable enough
         return;
     }
