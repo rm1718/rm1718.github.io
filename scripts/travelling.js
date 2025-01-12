@@ -65,11 +65,11 @@ function onNewPosition(position) {
     var speed = distance / time;
 
     //update speedometer
-    if(speed != NaN){
+    if (speed != NaN) {
         //$("#speedo-meter").text(` at ${Math.floor(speed * 3.6)} km/h`);
         $("#speedo-meter").text(` at acc: ${position.coords.accuracy} lat: ${position.coords.latitude}, long: ${position.coords.longitude}, time: ${time}, distance: ${Math.floor(distance)}, speed: ${Math.floor(speed * 3.6)} km/h`);
     }
-    else{
+    else {
         return;
     }
 
@@ -168,12 +168,27 @@ function wait(milliseconds) {
     });
 }
 
-function getDistanceBetweenPoints(lat1, lon1, lat2, lon2) {
-    const R = 6371e3;
-    const x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2);
-    const y = (lat2 - lat1);
-    const d = Math.sqrt(x * x + y * y) * R;
-    return d;
+function getDistanceBetweenPoints(lat1Deg, lon1Deg, lat2Deg, lon2Deg) {
+    function toRad(degree) {
+        return degree * Math.PI / 180;
+    }
+    
+    const lat1 = toRad(lat1Deg);
+    const lon1 = toRad(lon1Deg);
+    const lat2 = toRad(lat2Deg);
+    const lon2 = toRad(lon2Deg);
+    
+    const { sin, cos, sqrt, atan2 } = Math;
+    
+    const R = 6371000; 
+    const dLat = lat2 - lat1;
+    const dLon = lon2 - lon1;
+    const a = sin(dLat / 2) * sin(dLat / 2)
+            + cos(lat1) * cos(lat2)
+            * sin(dLon / 2) * sin(dLon / 2);
+    const c = 2 * atan2(sqrt(a), sqrt(1 - a)); 
+    const d = R * c;
+    return d; // distance in m
 }
 
 /**
