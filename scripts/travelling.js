@@ -75,6 +75,8 @@ function onNewPosition(position) {
 
     //set for next position
     lastimeStamp = position.timestamp;
+    lastLat = position.coords.latitude;
+    lastLong = position.coords.longitude;
 
     if (waitingPoints.length == 0 && speed <= minVelocity) {
         waitingPoints.push({
