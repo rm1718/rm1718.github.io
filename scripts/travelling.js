@@ -43,7 +43,7 @@ function startWatchingPosition() {
 
         const options = {
             enableHighAccuracy: true,
-            timeout: 5000,
+            timeout: 15000,
             maximumAge: 0,
         };
         navigator.geolocation.getCurrentPosition(function (pos) {
@@ -63,7 +63,12 @@ function onNewPosition(position) {
     var speed = distance / ((position.timestamp - lastimeStamp) / 1000);
 
     //update speedometer
-    $("#speedo-meter").text(`at ${Math.floor(speed * 3.6)} km/h`);
+    if(speed != NaN){
+        $("#speedo-meter").text(` at ${Math.floor(speed * 3.6)} km/h`);
+    }
+    else{
+        return;
+    }
 
     //set for next position
     lastimeStamp = position.timestamp;
