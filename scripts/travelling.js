@@ -60,11 +60,13 @@ function startWatchingPosition() {
 
 function onNewPosition(position) {
     var distance = getDistanceBetweenPoints(position.coords.latitude, position.coords.longitude, lastLat, lastLong);
-    var speed = distance / ((position.timestamp - lastimeStamp) / 1000);
+    var time = ((position.timestamp - lastimeStamp) / 1000);
+    var speed = distance / time;
 
     //update speedometer
     if(speed != NaN){
-        $("#speedo-meter").text(` at ${Math.floor(speed * 3.6)} km/h`);
+        //$("#speedo-meter").text(` at ${Math.floor(speed * 3.6)} km/h`);
+        $("#speedo-meter").text(` at lat: ${position.coords.latitude}, long: ${position.coords.latitude}, time: ${time} speed: ${Math.floor(speed * 3.6)} km/h`);
     }
     else{
         return;
