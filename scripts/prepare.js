@@ -1,10 +1,6 @@
 var velocityFromId = "minimum-velocity-form";
 var jQMinVelocityInputId = "#minimum-velocity-input";
 
-//init popover according to bootstrap: 
-const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
-const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
-
 async function navToTravelling() {
     var form = document.getElementById(velocityFromId);
 
@@ -21,6 +17,10 @@ async function navToTravelling() {
 
 
 $(function () {
+    //init popover according to bootstrap
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+
     //init form validation from bootstrap component
     var form = document.getElementById(velocityFromId);
 
