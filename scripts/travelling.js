@@ -57,11 +57,11 @@ function onNewPosition(position) {
     }
 
     var distance = getDistanceBetweenPoints(position.coords.latitude, position.coords.longitude, lastLat, lastLong);
-    var speed = distance / time;
+    var speed = Math.floor((distance / time) * 3.6);
 
     //update speedometer
     if (speed != NaN) {
-        $("#speedo-meter").text(` at ${Math.floor(speed * 3.6)} km/h`);
+        $("#speedo-meter").text(` at ${speed} km/h`);
     }
     else {
         return;
@@ -216,7 +216,7 @@ var greenTrafficLightImgPath = "/images/traffic-light-green.png";
 
 //minimum velocity in m/s
 const urlParams = new URLSearchParams(window.location.search);
-const minVelocity = parseFloat(urlParams.get('minvelocity')) / 3.6;
+const minVelocity = parseFloat(urlParams.get('minvelocity'));
 var lastLat = 0;
 var lastLong = 0;
 var lastimeStamp = 0;
