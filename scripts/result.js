@@ -7,13 +7,7 @@ function buildTotalWaitingTime() {
     for (let i = 0; i < waitingPoints.length; i++) {
         totalWaitingTime += waitingPoints[i].waitingSeconds;
     }
-
-    var hours = getHours(totalWaitingTime);
-    var minutes = getMinutes(totalWaitingTime);
-    var seconds = getSeconds(totalWaitingTime);
-    $("#waiting-hours").text(hours);
-    $("#waiting-minutes").text(minutes);
-    $("#waiting-seconds").text(seconds);
+    $("#total-waiting-time").text(getFormattedTime(totalWaitingTime));
 }
 
 function buildMap() {
@@ -52,6 +46,7 @@ function buildList() {
         listItem.setAttribute("href", "#");
         listItem.classList.add("list-group-item");
         listItem.classList.add("list-group-item-action");
+        listItem.classList.add("list-item-no-wrap");
         listItem.innerHTML = waitingPointToHtml(i + 1, wPoint);
         listItem.addEventListener("click", function (event) {
             event.preventDefault();
@@ -64,11 +59,28 @@ function buildList() {
 }
 
 function waitingPointToHtml(place, waitingPoint) {
-    var hours = getHours(waitingPoint.waitingSeconds);
-    var minutes = getMinutes(waitingPoint.waitingSeconds);
-    var seconds = getSeconds(waitingPoint.waitingSeconds);
-    var wTimeFormatted = `${hours}h ${minutes}min ${seconds}sec`;
+    var wTimeFormatted = getFormattedTime(waitingPoint.waitingSeconds);
     return `<b>${place}. Waiting Point</b><br>${wTimeFormatted}`;
+}
+
+function getFormattedTime(totalSeconds){
+    var hours = getHours(totalSeconds);
+    var minutes = getMinutes(totalSeconds);
+    var seconds = getSeconds(totalSeconds);
+    var formattedTime = "0h 0m 0s";
+
+    if(seconds > 0){
+        formattedTime = `${seconds}s`;
+    }
+
+    if(minutes > 0){
+        formattedTime = `${minutes}m ` + formattedTime;
+    }
+
+    if(hours > 0){
+        formattedTime = `${hours}h ` + formattedTime;
+    }
+    return formattedTime;
 }
 
 function getHours(totalWaitingTime) {

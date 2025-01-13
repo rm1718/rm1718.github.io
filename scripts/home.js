@@ -9,6 +9,30 @@ function navToPrepare() {
     window.location.href = "/html/prepare.html";
 }
 
+function checkSetup() {
+    //check for permission for location
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showSuccess, showError, {
+            enableHighAccuracy: false,
+            timeout: 5000
+        });
+    } else {        
+        //location is not supported by this browser
+        showCheckSetupError("Geolocation is not supported by this browser");
+    }
+}
+
+function showSuccess(_) {
+    $(setUpCheckContainerId).removeClass(errorMessageClassName);
+    $(setUpCheckContainerId).addClass(successMessageClassName);
+
+    $(setUpCheckResultMessageId).text("Your setup is approved and can be used");
+
+    $(setUpCheckErrorIconId).attr("hidden", true);
+    $(setUpCheckSuccessIconId).attr("hidden", false);
+    $(setUpCheckResultMessageId).attr("hidden", false);
+}
+
 function showError(error) {
     switch (error.code) {
         case error.PERMISSION_DENIED:
@@ -23,35 +47,6 @@ function showError(error) {
         case error.UNKNOWN_ERROR:
             showCheckSetupError("An unknown error occurred. Try again");
             break;
-    }
-}
-
-function showSuccess(position) {
-    var resultMessage = "Your browser isn't able to estimate the speed. Try changing your device or browser!";
-    var isSuccess = false;
-
-    if (position.coords.speed != null) {
-        resultMessage = "Your setup is approved and can be used";
-        isSuccess = true;
-    }
-
-    $(setUpCheckContainerId).removeClass(isSuccess ? errorMessageClassName : successMessageClassName);
-    $(setUpCheckContainerId).addClass(isSuccess ? successMessageClassName : errorMessageClassName);
-
-    $(setUpCheckResultMessageId).text(resultMessage);
-
-    $(setUpCheckErrorIconId).attr("hidden", isSuccess);
-    $(setUpCheckSuccessIconId).attr("hidden", !isSuccess);
-    $(setUpCheckResultMessageId).attr("hidden", false);
-}
-
-function checkSetup() {
-    //check for permission for location
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showSuccess, showError);
-    } else {        
-        //location is not supported by this browser
-        showCheckSetupError("Geolocation is not supported by this browser");
     }
 }
 

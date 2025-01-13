@@ -1,28 +1,7 @@
 /**
- *  Data for testing 
- * 
- *  {
-        latitude: 49.01230471623594,
-        longitude: 8.396098558159043,
-        startUnixTimeStamp: 1736636189000,
-        waitingSeconds: 30,
-        isClosed: true
-    },
-    {
-        latitude: 49.01062987955606,
-        longitude: 8.397922460303354,
-        startUnixTimeStamp: 1736636265000,
-        waitingSeconds: 10,
-        isClosed: true
-    },
-    {
-        latitude: 49.008434209993574,
-        longitude: 8.402020875709985,
-        startUnixTimeStamp: 1736637173000,
-        waitingSeconds: 50,
-        isClosed: false
-    }
+ * Definition
  */
+var watchId;
 
 async function startTravel() {
     var trafficLightInterval = 1000;
@@ -47,12 +26,23 @@ function startWatchingPosition() {
             maximumAge: 0,
 
         };
-        navigator.geolocation.getCurrentPosition(function (pos) {
-            lastLat = pos.coords.latitude;
-            lastLong = pos.coords.longitude;
-            lastimeStamp = pos.timestamp;
-        }, showError, options);
-        watchId = navigator.geolocation.watchPosition(onNewPosition, showError, options);
+        navigator.geolocation.getCurrentPosition(
+            function (pos) {
+                lastLat = pos.coords.latitude;
+                lastLong = pos.coords.longitude;
+                lastimeStamp = pos.timestamp;
+
+                watchId = navigator.geolocation.watchPosition(
+                    onNewPosition,
+                    function (err) {
+                        showError(err, true);
+                    }, 
+                    options);
+            },
+            function (err) {
+                showError(err, false);
+            },
+            options);
     } else {
         //location is not supported by this browser
         showSetupError("Geolocation is not supported by this browser");
@@ -61,7 +51,7 @@ function startWatchingPosition() {
 
 function onNewPosition(position) {
     var time = ((position.timestamp - lastimeStamp) / 1000);
-    if(time < 3){
+    if (time < 3) {
         //wait till movement is stable enough
         return;
     }
@@ -71,8 +61,7 @@ function onNewPosition(position) {
 
     //update speedometer
     if (speed != NaN) {
-        //$("#speedo-meter").text(` at ${Math.floor(speed * 3.6)} km/h`);
-        $("#speedo-meter").text(` at acc: ${position.coords.accuracy} lat: ${position.coords.latitude}, long: ${position.coords.longitude}, time: ${time}, distance: ${Math.floor(distance)}, speed: ${Math.floor(speed * 3.6)} km/h`);
+        $("#speedo-meter").text(` at ${Math.floor(speed * 3.6)} km/h`);
     }
     else {
         return;
@@ -117,14 +106,25 @@ function onNewPosition(position) {
     }
 }
 
-function showError(error) {
+function showError(error, travelling) {
+    if (error.code == error.PERMISSION_DENIED) {
+        showSetupError("You denied the usage of your location, but we need your location to get the speed of your device")
+        return;
+    }
+
+    if (travelling) {
+        return;
+    }
+
     switch (error.code) {
-        case error.PERMISSION_DENIED:
-            showSetupError("You denied the usage of your location, but we need your location to get the speed of your device");
-            break;
         case error.POSITION_UNAVAILABLE:
+            showSetupError("Location information is unavailable. Try again with better GPS");
+            break;
         case error.TIMEOUT:
+            showSetupError("Verifing the usage of your location timed out. Try again");
+            break;
         case error.UNKNOWN_ERROR:
+            showSetupError("An unknown error occurred. Try again");
             break;
     }
 }
@@ -156,13 +156,14 @@ function navToResult() {
     // convert to records
     // 
     // We ignore all waiting points with waiting seconds below 6 seconds,
-    // because of inaccuracy of GPS.
+    // because of inaccuracy of GPS we can distinguish between actual stop
+    // or jitter.
     // 
     // One record has max 192bit
     var waitingPointRecords = [];
     for (let i = 0; i < waitingPoints.length; i++) {
         var wPoint = waitingPoints[i];
-        if(wPoint.waitingSeconds > 6){
+        if (wPoint.waitingSeconds > 6) {
             waitingPointRecords.push({
                 latitude: wPoint.latitude,
                 longitude: wPoint.longitude,
@@ -186,21 +187,21 @@ function getDistanceBetweenPoints(lat1Deg, lon1Deg, lat2Deg, lon2Deg) {
     function toRad(degree) {
         return degree * Math.PI / 180;
     }
-    
+
     const lat1 = toRad(lat1Deg);
     const lon1 = toRad(lon1Deg);
     const lat2 = toRad(lat2Deg);
     const lon2 = toRad(lon2Deg);
-    
+
     const { sin, cos, sqrt, atan2 } = Math;
-    
-    const R = 6371000; 
+
+    const R = 6371000;
     const dLat = lat2 - lat1;
     const dLon = lon2 - lon1;
     const a = sin(dLat / 2) * sin(dLat / 2)
-            + cos(lat1) * cos(lat2)
-            * sin(dLon / 2) * sin(dLon / 2);
-    const c = 2 * atan2(sqrt(a), sqrt(1 - a)); 
+        + cos(lat1) * cos(lat2)
+        * sin(dLon / 2) * sin(dLon / 2);
+    const c = 2 * atan2(sqrt(a), sqrt(1 - a));
     const d = R * c;
     return d; // distance in m
 }
@@ -212,7 +213,6 @@ function getDistanceBetweenPoints(lat1Deg, lon1Deg, lat2Deg, lon2Deg) {
 var jQTrafficLightId = "#traffic-light-image"
 var yellowTrafficLightImgPath = "/images/traffic-light-yellow.png";
 var greenTrafficLightImgPath = "/images/traffic-light-green.png";
-var watchId;
 
 //minimum velocity in m/s
 const urlParams = new URLSearchParams(window.location.search);
