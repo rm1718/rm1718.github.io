@@ -15,7 +15,7 @@ The following features are implemented:
 - Displaying all waiting locations, including the waited time at its location, on a map by 
 using [Leaflet](https://leafletjs.com/index.html)
 - Responsive behaviour for desktop, mobile phones and tabelts
-- Deploying [HowLongDoIWait](https://rm1718.github.io/) with github pages in a secure context
+- Deploying with domain [https://rm1718.github.io/](https://rm1718.github.io/) by using github pages
 
 ## Usage
 The steps below help to have the best experience with HowLongDoIWait. This flow was successfully executed 
