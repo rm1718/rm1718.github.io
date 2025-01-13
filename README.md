@@ -40,7 +40,7 @@ HowLongDoIWait is limited by its enviromental factors and highly depends on the 
 limits should be kept in mind:
 1. All waiting positions with less than 6 seconds waiting time, are ignored because the 
 system can not differ between the jitter/inaccuracy of the GPS and real short waiting times
-2. The system works best with a large difference between minimum velocity and average velocity when travelling
+2. The system works best with a high difference between minimum velocity and 0 because of the jitter of the GPS
 3. Altitude changes are not recognized and therefore can lead to "waiting positions"
 4. Website needs to be kept open/visible on device so it can still receive updates on positions
 5. Device should use GPS for good results
