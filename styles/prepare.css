@@ -1,15 +1,17 @@
 /*
-name selectors
+Id selectors
 */
-#minimum-velocity-header-container{
+#minimum-velocity-header-container {
     display: flex;
     align-items: center;
 }
-#minimum-velocity-input-container{
+
+#minimum-velocity-input-container {
     display: flex;
     align-items: stretch;
 }
-#go-btn{
+
+#go-btn {
     margin-top: 1rem;
 }
 
@@ -23,13 +25,16 @@ class selectors
     letter-spacing: 0.001em;
     text-align: center;
 }
-.frac > span {
+
+.frac>span {
     display: block;
     padding: 0.1em;
 }
+
 .frac span.bottom {
     border-top: thin solid black;
 }
+
 .frac span.symbol {
     display: none;
 }

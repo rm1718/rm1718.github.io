@@ -51,16 +51,17 @@
         <div class="max-length-container">
             <section id="start-trip-container">
                 <div>
-                    <h2>Start</h2>
-                    <p>
+                    <h2 class="start-travel-first-row">Start</h2>
+                    <p class="start-travel-first-row">
                         As soon as the traffic light switches to <span>green</span>,
                         you can start your trip
                     </p>
-                    <button id="go-btn" type="submit" class="btn btn-primary primary-action-btn">Start travel</button>
                 </div>
+                <button id="go-btn" type="submit"
+                    class="btn btn-primary primary-action-btn start-travel-first-row">Start travel</button>
                 <img id="traffic-light-image" src="/images/traffic-light-red.png" alt="red traffic light ">
             </section>
-            <div id="travelling-container" class="page-container" hidden>
+            <div id="travelling-container" hidden>
                 <h1 id="travel-icons">
                     <span><i class="bi-person-walking"></i></span>
                     ...
@@ -78,16 +79,20 @@
                         You are travelling<span id="speedo-meter"></span>. Please watch the road!
                     </p>
                 </section>
-                <button id="back-btn" type="button" class="btn btn-primary secondary-action-btn">Back to
-                    prepare</button>
-                <button id="arrived-btn" type="button" class="btn btn-primary primary-action-btn">Arrived at
-                    destination</button>
+                <div class="btn-container">
+                    <button id="back-btn" type="button" class="btn btn-primary secondary-action-btn">Back to
+                        prepare</button>
+                    <button id="arrived-btn" type="button" class="btn btn-primary primary-action-btn">Arrived at
+                        destination</button>
+                </div>
             </div>
-            <div id="error-container" class="page-container" hidden>
-                <h5 id="error-message">Unknown error occured</h5>
-                <button id="err-back-btn" type="button" class="btn btn-primary secondary-action-btn">Back to
-                    prepare</button>
-                <button id="retry-btn" type="button" class="btn btn-primary primary-action-btn">Retry</button>
+            <div id="error-container" hidden>
+                <p id="error-message" class="error-message">Unknown error occured</p>
+                <div class="btn-container">
+                    <button id="err-back-btn" type="button" class="btn btn-primary secondary-action-btn">Back to
+                        prepare</button>
+                    <button id="retry-btn" type="button" class="btn btn-primary primary-action-btn">Retry</button>
+                </div>
             </div>
         </div>
     </main>

@@ -57,7 +57,7 @@
                             Minimum Velocity
                             <a tabindex="0" class="icon-link icon-link-hover link-color" role="button"
                                 data-bs-toggle="popover" data-bs-trigger="focus" data-bs-title="Minimum Velocity?"
-                                data-bs-content="If your device is moving below this velocity, the system perceives the movement as waiting. System works best with a minimum velocity and high average velocity.">
+                                data-bs-content="If your device is moving below this velocity, the system perceives the movement as waiting. The system works best with a minimum velocity and high average velocity.">
                                 <i class="bi bi-info-circle"></i>
                             </a>
                         </h2>
@@ -79,14 +79,17 @@
                     </section>
                 </section>
 
-                <section>
+                <section class="stretcher">
                     <h2>Reminders</h2>
                     <ol class="list-group list-group-numbered">
                         <li class="list-group-item">Keep website open</li>
-                        <li class="list-group-item">Prevent your device to change into standy mode. The website needs to
+                        <li class="list-group-item">Prevent your device from switch to standy mode. The website needs to
                             be
                             visible on your phone</li>
                         <li class="list-group-item">Keep GPS activated</li>
+                        <li class="list-group-item">All waiting points below 6 seconds are ignored because they can't
+                            be distinguish from GPS inaccuracy</li>
+                        <li class="list-group-item">For good results, prevent using battery saving mode on your device</li>
                     </ol>
                     <button id="go-btn" type="submit" class="btn btn-primary primary-action-btn">Continue</button>
                 </section>

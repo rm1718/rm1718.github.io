@@ -39,14 +39,13 @@
         <nav class="navbar bg-body-tertiary nav-underline">
             <div class="container-fluid">
                 <a class="navbar-brand nav-title">HowLongDoIWait</a>
-                <button id="short-cut-go-btn" type="button" class="btn btn-primary primary-action-btn">Let's Go</button>
+                <button id="short-cut-go-btn" type="button" class="btn btn-primary primary-action-btn">Go</button>
             </div>
         </nav>
     </header>
     <main class="page">
         <div class="max-length-container">
             <article id="welcome-container">
-                <!--img of Logo-->
                 <h1>Don't wait, move!</h1>
                 <div id="routes-container">
                     <img class="route" src="/images/route_a.png" alt="Route a">
@@ -61,7 +60,7 @@
                 <button id="go-btn" type="button" class="btn btn-primary primary-action-btn">Let's Go</button>
             </article>
             <article class="info-article">
-                <div>
+                <div class="icon-placer">
                     <h2>How does it work</h2>
                     <p>
                         HowLongDoIWait measures the time your device is moving below a specified minimum
@@ -69,14 +68,14 @@
                         system perceives this movement as waiting. So choose your own 'waiting'
                         velocity, e.g. 0 km/h.
                     </p>
-                </div>
-                <div class="icon-container">
-                    <i class="bi-stopwatch icon"></i>
-                    <i class="bi-speedometer icon"></i>
+                    <div id="timer-velocity-icons" class="icon-container">
+                        <i class="bi-stopwatch icon"></i>
+                        <i class="bi-speedometer icon"></i>
+                    </div>
                 </div>
             </article>
             <article class="info-article">
-                <div>
+                <div class="icon-placer">
                     <h2>Requirements</h2>
                     <p>
                         In order to be able to use this tool, your device and your browser must have a way to measure
@@ -94,14 +93,14 @@
                         <i id="setup-check-success-icon" class="bi bi-check-circle-fill" hidden="true"></i>
                         <p id="setup-check-result" hidden="true"></p>
                     </div>
-                </div>
-                <div class="icon-container">
-                    <h1><i class="bi bi-phone icon"></i></h1>
-                    <h1><i class="bi bi-laptop icon"></i></h1>
-                </div>
-                <div class="icon-container">
-                    <h1><i class="bi bi-browser-chrome icon"></i></h1>
-                    <h1><i class="bi bi-browser-firefox icon"></i></h1>
+                    <div id="phone-chrome-icons" class="icon-container">
+                        <h1><i class="bi bi-phone icon"></i></h1>
+                        <h1><i class="bi bi-browser-chrome icon"></i></h1>
+                    </div>
+                    <div id="laptop-firefox-icons" class="icon-container">
+                        <h1><i class="bi bi-laptop icon"></i></h1>
+                        <h1><i class="bi bi-browser-firefox icon"></i></h1>
+                    </div>
                 </div>
             </article>
         </div>

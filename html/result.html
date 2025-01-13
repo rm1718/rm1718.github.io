@@ -60,15 +60,14 @@
     <main class="page">
         <div class="max-length-container">
             <article id="total-waiting-time-container" class="info-article">
-                <h1>Total <br> Waiting <br> Time</h1>
+                <h1>Total <br class="total-waiting-time-break"> Waiting <br class="total-waiting-time-break"> Time</h1>
                 <div id="total-waiting-time-inner-container">
-                    <p id="total-waiting-time">
-                        <span id="waiting-hours">0</span>h
-                        <span id="waiting-minutes">0</span>min
-                        <span id="waiting-seconds">0</span>sec
-                    </p>
-                    <button id="restart-btn" type="button" class="btn btn-primary secondary-action-btn">Restart</button>
-                    <button id="home-btn" type="button" class="btn btn-primary primary-action-btn">Home</button>
+                    <p id="total-waiting-time">0h 0m 0s</p>
+                    <div class="btn-container">
+                        <button id="restart-btn" type="button"
+                            class="btn btn-primary secondary-action-btn">Restart</button>
+                        <button id="home-btn" type="button" class="btn btn-primary primary-action-btn">Home</button>
+                    </div>
                 </div>
             </article>
             <article>
@@ -76,14 +75,13 @@
                     Details
                 </h2>
                 <div id="map-container">
+                    <ul id="waiting-locations" class="list-group list-group-horizontal position-relative overflow-auto">
+                        <li class="list-group-item">
+                            <h5>Waiting Points: </h5>
+                        </li>
+                        <a id="placeholder-list-item" href="#" class="list-group-item">No waiting points</a>
+                    </ul>
                     <div id="map"></div>
-                    <div id="waiting-locations" class="list-group .list-group-horizontal">
-                        <a href="#" class="list-group-item list-group-item-action">
-                            <h5>Waiting Points</h5>
-                        </a>
-                        <a id="placeholder-list-item" href="#" class="list-group-item list-group-item-action">No waiting
-                            points</a>
-                    </div>
                 </div>
             </article>
         </div>
