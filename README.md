@@ -35,12 +35,15 @@ with an Android 11 smartphone, using google chrome and walking through the city:
 12. Press button ```Arrived at destination```
 13. Reviewed total waiting time and three stops on map
 
+Other successful tests were done by bike with a minimum velocity of 7 km/h
+
 ## Limitations
 HowLongDoIWait is limited by its enviromental factors and highly depends on the accuracy of the retrieved location. Therefore the following
 limits should be kept in mind:
 1. All waiting positions with less than 6 seconds waiting time, are ignored because the 
 system can not differ between the jitter/inaccuracy of the GPS and real short waiting times
-2. The system works best with a big difference between minimum velocity and 0 because of the jitter of the GPS
+2. The system works best with a big difference between minimum velocity and 0 as well as a big difference 
+between minimum velocity and average travelling velocity because of the jitter of the GPS. (good sample values are: 1km/h by foot, 7-9km/h by bike, 10-12km/h by car)
 3. Altitude changes are not recognized and therefore can lead to "waiting positions"
 4. Website needs to be kept open/visible on device so it can still receive updates on positions
 5. Device should use GPS for good results
