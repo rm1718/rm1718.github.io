@@ -4,7 +4,7 @@ The main idea of HowLongDoIWait is to estimate the waited time during a trip.
 ## Use Case
 HowLongDoIWait can be applied whenever a user wants some estimation about its waiting time during 
 travelling by foot, bike, car or train. For example, the user can compare two bike routes, by using 
-HowLongDoIWait to test the difference in the waiting time.
+HowLongDoIWait to test the difference in the waiting time. It's mainly developed for travelling by bike because big enough differences between average travelling velocity and minimum velocity as well as between minimum velocity and 0 are needed, to obtain useable results.
 
 ## Features
 The following features are implemented:
